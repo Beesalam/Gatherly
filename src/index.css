@@ -50,10 +50,11 @@ body{
 }
 
 .tagline {
+  display: inline-block;
   font-size: 13px;
-  background-color: #2B2A2A; 
+  background-color: #2B2A2A;
   color: #8D8A8A;
-  width: 274px;
+  max-width: 274px;
   height: 37px;
   padding: 9px 20px;
   gap: 10px;
@@ -131,7 +132,7 @@ body{
   background-color:#353535;
   border-radius: 0 0 13px 13px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 150%;
+  width: 100%;
   padding: 20px;
   text-align: left;
   font-size: 16px;
@@ -415,5 +416,164 @@ footer p{
   padding:10px 25px;
   border-radius:6px;
   cursor:pointer;
+}
+
+/* ==============================
+   TABLET  ≤ 768px
+   ============================== */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 16px 24px;
+  }
+
+  .organizer {
+    font-size: 13px;
+    padding: 10px 14px;
+  }
+
+  .hero {
+    padding: 60px 24px 40px;
+  }
+
+  .hero h1 {
+    font-size: 2.6rem;
+  }
+
+  .hero p {
+    font-size: 15px;
+  }
+
+  .features {
+    padding: 60px 24px;
+  }
+
+  .features h2 {
+    font-size: 42px;
+    line-height: 52px;
+  }
+
+  .feature-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .why-us {
+    flex-direction: column;
+    padding: 60px 24px;
+    gap: 30px;
+  }
+
+  .left h2 {
+    font-size: 38px;
+  }
+
+  .cta {
+    padding: 60px 24px;
+  }
+
+  .cta h2 {
+    font-size: 42px;
+    line-height: 52px;
+  }
+
+  footer {
+    padding: 40px 24px;
+  }
+
+  .events-list-page {
+    padding: 40px 24px;
+  }
+
+  .events-list-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .search-filter {
+    flex-wrap: wrap;
+  }
+
+  .search-filter select {
+    width: 100%;
+  }
+}
+
+/* ==============================
+   MOBILE  ≤ 480px
+   ============================== */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 14px 16px;
+  }
+
+  .organizer {
+    display: none;
+  }
+
+  .hero {
+    padding: 48px 16px 32px;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .hero p {
+    font-size: 14px;
+  }
+
+  .hero-btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-btns button {
+    margin: 0;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .features {
+    padding: 48px 16px;
+  }
+
+  .features h2 {
+    font-size: 30px;
+    line-height: 38px;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .why-us {
+    padding: 48px 16px;
+  }
+
+  .left h2 {
+    font-size: 28px;
+  }
+
+  .cta {
+    padding: 48px 16px;
+  }
+
+  .cta h2 {
+    font-size: 30px;
+    line-height: 38px;
+  }
+
+  footer {
+    padding: 32px 16px;
+  }
+
+  .events-list-page {
+    padding: 32px 16px;
+  }
+
+  .events-list-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
