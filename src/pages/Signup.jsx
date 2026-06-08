@@ -8,11 +8,6 @@ function Signup() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log({ name, contact, email, password })
-  }
-
   const inputStyle = {
     width: '100%',
     padding: '14px 16px',
@@ -31,6 +26,30 @@ function Signup() {
     marginBottom: '6px',
     fontWeight: '500',
   }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+    if (!emailRegex.test(email)) {
+      alert("Please enter a valid email address");
+      return;
+    }
+
+    if (!passwordRegex.test(password)) {
+      alert(
+        "Password must be at least 8 characters and contain uppercase, lowercase, and a number"
+      );
+      return;
+    }
+
+    console.log({ name, contact, email, password });
+    alert("Signup Successful!");
+  };
 
   return (
     <div style={{
@@ -66,6 +85,7 @@ function Signup() {
           <div>
             <label style={labelStyle}>Full name</label>
             <input
+              type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Wealth Happiness"
@@ -76,6 +96,7 @@ function Signup() {
           <div>
             <label style={labelStyle}>Contact</label>
             <input
+              type="text"
               value={contact}
               onChange={(e) => setContact(e.target.value)}
               placeholder="09134671010"

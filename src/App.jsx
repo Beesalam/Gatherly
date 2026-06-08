@@ -4,6 +4,7 @@ import EventsPage from "./pages/Events";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
+import Dashboard from "./pages/Dashboard";
 
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
             <Route path="signup" element={<Signup />} />
             <Route path="login" element={<Login />} />
             <Route path="*" element={<NotFound />} />
-            <Route path="dashboard" element={<h1>Dashboard - Coming Soon</h1>} />
+            <Route path="dashboard" element={<Dashboard />} />
+            
         </Routes>
     );
 }

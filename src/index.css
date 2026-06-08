@@ -418,6 +418,67 @@ footer p{
   cursor:pointer;
 }
 
+.dashboard-page{
+min-height:80vh;
+padding:60px 80px;
+}
+
+.dashboard-header h1{
+font-size:42px;
+margin-bottom:10px;
+}
+
+.dashboard-header p{
+color:#666;
+}
+
+.empty-state{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+margin-top:150px;
+text-align:center;
+gap: 20px;
+}
+
+.empty-state h3{
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 29px;
+  color: #8D8A8A;
+
+}
+
+.empty-state p{
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: #0E0D0D;
+}
+
+.empty-state button{
+margin-top:20px;
+background:#8a0029;
+color:white;
+border:none;
+padding:12px 24px;
+border-radius:8px;
+cursor:pointer;
+}
+
+.dashboard-header {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.empty-state {
+  max-width: 540px;
+  margin: 150px auto 0;
+  width: 100%;
+  padding: 0 20px;
+}
+
 /* ==============================
    TABLET  ≤ 768px
    ============================== */
@@ -494,6 +555,29 @@ footer p{
   .search-filter select {
     width: 100%;
   }
+
+  .dashboard-page {
+    padding: 40px 24px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 34px;
+  }
+
+  .dashboard-header p,
+  .empty-state p {
+    font-size: 15px;
+  }
+
+  .empty-state {
+    margin-top: 110px;
+    padding: 0 10px;
+    gap: 16px;
+  }
+
+  .empty-state button {
+    padding: 14px 26px;
+  }
 }
 
 /* ==============================
@@ -506,6 +590,30 @@ footer p{
 
   .organizer {
     display: none;
+  }
+
+  .dashboard-page {
+    padding: 32px 16px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 30px;
+    line-height: 1.1;
+  }
+
+  .dashboard-header p,
+  .empty-state p {
+    font-size: 14px;
+  }
+
+  .empty-state {
+    margin-top: 80px;
+    padding: 0 12px;
+  }
+
+  .empty-state button {
+    width: 100%;
+    padding: 14px 20px;
   }
 
   .hero {

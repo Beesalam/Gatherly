@@ -6,11 +6,6 @@ function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log({ email, password })
-  }
-
   const inputStyle = {
     width: '100%',
     padding: '14px 16px',
@@ -29,6 +24,30 @@ function Login() {
     marginBottom: '6px',
     fontWeight: '500',
   }
+
+  const handleSubmit = (e) => {
+  e.preventDefault();
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+  if (!emailRegex.test(email)) {
+    alert("Please enter a valid email address");
+    return;
+  }
+
+  if (!passwordRegex.test(password)) {
+    alert(
+      "Password must be at least 8 characters and contain uppercase, lowercase, and a number"
+    );
+    return;
+  }
+
+  console.log({ email, password });
+  alert("Login Successful!");
+  };
 
   return (
     <div style={{

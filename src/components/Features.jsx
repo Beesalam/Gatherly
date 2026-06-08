@@ -1,4 +1,6 @@
 import { LuCalendarDays } from "react-icons/lu";
+import { HiOutlineUsers } from "react-icons/hi2";
+import { IoTicketOutline } from "react-icons/io5";
 
 const Features = () => {
   return (
@@ -24,7 +26,10 @@ const Features = () => {
         </div>
 
         <div className="feature-card">
-          
+          <span style={{ backgroundColor:"#800080", padding:"10px", marginBlockStart:"-20px", borderRadius:"30%", display:"inline-block", color:"#fff", marginBottom:"12px" }}>
+        <HiOutlineUsers />
+          </span>
+
           <h3>RSVP Management</h3>
           <p>
             Track attendees and manage capacity.
@@ -32,6 +37,9 @@ const Features = () => {
         </div>
 
         <div className="feature-card">
+          <span style={{ backgroundColor: "#0000FF", padding:"10px", marginBlockStart:"-20px", borderRadius:"30%", display:"inline-block", color:"#fff", marginBottom:"12px" }}>
+        <IoTicketOutline />
+          </span>
 
           <h3>Digital Tickets</h3>
           <p>
