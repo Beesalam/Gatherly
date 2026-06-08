@@ -1,7 +1,13 @@
+import { useNavigate } from "react-router-dom";
+
 const Navbar = () => {
+  const navigate = useNavigate();
+  const btn = () => {
+    navigate('/')
+  }
   return (
     <nav className="navbar">
-      <h2>Gather<span style={{ color: '#E57591' }}>ly</span></h2>
+      <h2 onClick={()=>btn()}>Gather<span style={{ color: '#E57591', cursor:"pointer" }}>ly</span></h2>
 
       <div className="nav-btns">
         <button className="organizer">

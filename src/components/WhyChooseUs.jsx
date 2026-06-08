@@ -24,20 +24,20 @@ const WhyChooseUs = () => {
 
       </div>
 
-       <div class="right">
-             <div class="mockup">
-              <div class="bar"></div>
-              <div class="line"></div>
-              <div class="line short"></div>
+      <div className="right">
+        <div className="mockup">
+          <div className="bar"></div>
+          <div className="line"></div>
+          <div className="line short"></div>
 
-              <div class="boxes">
-               <div></div>
-               <div></div>
-              </div>
-
-              <div class="footer-bar"></div>
-           </div>
+          <div className="boxes">
+            <div></div>
+            <div></div>
           </div>
+
+          <div className="footer-bar"></div>
+        </div>
+      </div>
     </section>
   );
 };
