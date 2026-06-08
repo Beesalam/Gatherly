@@ -3,7 +3,7 @@ const Features = () => {
     <section className="features">
 
       <h2>
-        Everything you need to
+        Everything you need toooo
         <br />
         host amazing events
       </h2>
