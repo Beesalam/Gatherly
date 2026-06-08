@@ -7,7 +7,7 @@ const Features = () => {
     <section className="features">
 
       <h2>
-        Everything you need toooo
+        Everything you need to
         <br />
         host amazing events
       </h2>
