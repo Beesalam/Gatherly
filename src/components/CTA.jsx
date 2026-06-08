@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 const CTA = () => {
   return (
     <section className="cta">
@@ -12,9 +14,9 @@ const CTA = () => {
         Join event organizers who trust us.
       </p>
 
-      <button className="secondary-btn">
-        Get Started Now →
-      </button>
+      <Link to="/signup">
+        <button className="secondary-btn">Get Started Now →</button>
+      </Link>
 
     </section>
   );

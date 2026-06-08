@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 const WhyChooseUs = () => {
   return (
     <section className="why-us">
@@ -18,9 +20,9 @@ const WhyChooseUs = () => {
           <li>Real-time attendance tracking</li>
         </ul>
 
-        <button className="primary-btn">
-          Start Creating Events
-        </button>
+        <Link to="/signup">
+          <button className="primary-btn">Start Creating Events</button>
+        </Link>
 
       </div>
 

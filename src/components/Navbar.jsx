@@ -1,20 +1,22 @@
 import { useNavigate } from "react-router-dom";
+import Logo from "./Logo";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const btn = () => {
-    navigate('/')
-  }
+
   return (
     <nav className="navbar">
-      <h2 onClick={()=>btn()}>Gather<span style={{ color: '#E57591', cursor:"pointer" }}>ly</span></h2>
+      {/* <h2 onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+        Gather<span style={{ color: '#E57591' }}>ly</span>
+      </h2> */}
+     <Logo/>
 
       <div className="nav-btns">
-        <button className="organizer">
+        <button className="organizer" onClick={() => navigate('/signup')}>
           Become an Organizer →
         </button>
 
-        <button className="login">
+        <button className="login" onClick={() => navigate('/login')}>
           Login
         </button>
       </div>

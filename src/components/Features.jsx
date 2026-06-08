@@ -1,3 +1,5 @@
+import { LuCalendarDays } from "react-icons/lu";
+
 const Features = () => {
   return (
     <section className="features">
@@ -12,6 +14,9 @@ const Features = () => {
       <div className="feature-grid">
 
         <div className="feature-card">
+          <span style={{ backgroundColor: "#A52A2A", padding:"10px", marginBlockStart:"-20px", borderRadius:"30%", display:"inline-block", color:"#fff", marginBottom:"12px" }}>
+<LuCalendarDays />
+          </span>
           <h3>Easy Event Creation</h3>
           <p>
             Create and customize events in minutes.
@@ -19,6 +24,7 @@ const Features = () => {
         </div>
 
         <div className="feature-card">
+          
           <h3>RSVP Management</h3>
           <p>
             Track attendees and manage capacity.
@@ -26,6 +32,7 @@ const Features = () => {
         </div>
 
         <div className="feature-card">
+
           <h3>Digital Tickets</h3>
           <p>
             Generate unique tickets instantly.
