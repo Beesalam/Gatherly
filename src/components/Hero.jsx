@@ -1,6 +1,7 @@
 import EventCard from "./EventCard";
 import { Link } from "react-router-dom";
 
+
 const Hero = () => {
   return (
     <section className="hero">
@@ -22,7 +23,7 @@ const Hero = () => {
       </p>
 
       <div className="hero-btns">
-        <button>Create Account</button>
+        <Link to="/signup"><button>Create Account</button></Link>
         <Link to="/events">
           <button className="secondary">
             See Events
