@@ -7,6 +7,7 @@ import NotFound from "./pages/NotFound";
 import Dashboard from "./pages/Dashboard";
 
 
+
 function App() {
     return (
         <Routes>
@@ -16,6 +17,7 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="*" element={<NotFound />} />
             <Route path="dashboard" element={<Dashboard />} />
+            
             
         </Routes>
     );
