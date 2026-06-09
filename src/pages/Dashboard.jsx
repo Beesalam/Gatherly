@@ -5,6 +5,8 @@ import { HiOutlineUsers } from "react-icons/hi2";
 import { CiLocationOn } from "react-icons/ci";
 import { BsCalendarDateFill } from "react-icons/bs";
 import NavbarTwo from '../components/NavbarTwo';
+import CreateEventModal from '../components/CreateEventModal';
+import CheckInModal from '../components/CheckInModal';
 
 
 
@@ -27,13 +29,37 @@ price: "Free",
 
 const Dashboard = () =>{
     const [openMenuId, setOpenMenuId] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [checkInEvent, setCheckInEvent] = useState(null);
 
     return(
         <>
         <NavbarTwo />
+        <CreateEventModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+        <CheckInModal isOpen={!!checkInEvent} onClose={() => setCheckInEvent(null)} eventTitle={checkInEvent?.title} />
         <section className="dashboard-page">
-             <h1>My Events Dashboard</h1>
-              <p>Manage your events and check-in attendees</p> 
+             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', marginBottom: '8px' }}>
+               <div>
+                 <h1>My Events Dashboard</h1>
+                 <p>Manage your events and check-in attendees</p>
+               </div>
+               <button
+                 onClick={() => setModalOpen(true)}
+                 style={{
+                   background: '#800020',
+                   color: '#fff',
+                   border: 'none',
+                   borderRadius: '8px',
+                   padding: '13px 22px',
+                   fontSize: '14px',
+                   fontWeight: '600',
+                   cursor: 'pointer',
+                   fontFamily: 'Poppins, sans-serif',
+                 }}
+               >
+                 + Create New Event
+               </button>
+             </div>
               <div className="dashboard-grid"> {myEvents.map((event) => ( 
                 <div className="dashboard-card" key={event.id}> 
                 <div className="card-banner"> 
@@ -66,7 +92,7 @@ const Dashboard = () =>{
                     <p> <span style={{ backgroundColor: "white", padding:"6px", marginBlockStart:"-20px", borderRadius:"10%", display:"inline-block", color:"#E57591", marginBottom:"6px" }}><IoTicketOutline /></span>
                     {event.price}</p> 
                 <div className="dashboard-actions"> 
-                    <button className="checkin-btn"> Check-In Attendee </button> 
+                    <button className="checkin-btn" onClick={() => setCheckInEvent(event)}> Check-In Attendee </button>
                     <button className="delete-btn"> Delete Event </button>
                  </div>
                   </div> 
