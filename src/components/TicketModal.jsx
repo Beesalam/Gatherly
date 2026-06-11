@@ -61,7 +61,6 @@ const TicketModal = ({ isOpen, onClose, event, attendee }) => {
           fontFamily: 'Poppins, sans-serif',
         }}
       >
-        {/* Close Button */}
         <button
           type="button"
           onClick={onClose}
@@ -79,7 +78,6 @@ const TicketModal = ({ isOpen, onClose, event, attendee }) => {
           ✕
         </button>
 
-        {/* Title */}
         <h3
           style={{
             margin: 0,
@@ -91,7 +89,6 @@ const TicketModal = ({ isOpen, onClose, event, attendee }) => {
           {event?.title || "Community Yoga in the Park"}
         </h3>
 
-        {/* Category */}
         <span
           style={{
             display: "inline-block",
@@ -106,7 +103,6 @@ const TicketModal = ({ isOpen, onClose, event, attendee }) => {
           {event?.category || "Sport"}
         </span>
 
-        {/* Banner */}
         <div
           style={{
             marginTop: "14px",
@@ -117,7 +113,7 @@ const TicketModal = ({ isOpen, onClose, event, attendee }) => {
           }}
         />
 
-        {/* Description */}
+
         <p
           style={{
             marginTop: "12px",
@@ -129,7 +125,6 @@ const TicketModal = ({ isOpen, onClose, event, attendee }) => {
           {event?.description || "Free outdoor yoga session for all levels. Bring your mat and enjoy 3 hours of mindfulness"}
         </p>
 
-        {/* Event Details */}
         <div
           style={{
             background: "#fafafa",
@@ -223,7 +218,7 @@ const TicketModal = ({ isOpen, onClose, event, attendee }) => {
           </div>
         </div>
 
-        {/* Organizer */}
+
         <div
           style={{
             marginTop: "14px",
@@ -264,7 +259,7 @@ const TicketModal = ({ isOpen, onClose, event, attendee }) => {
           </div>
         </div>
 
-        {/* Ticket Section */}
+        
         <div
           style={{
             marginTop: "16px",
