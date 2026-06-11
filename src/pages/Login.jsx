@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../components/Logo'
+import { toast } from 'react-toastify';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; 
 
 function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
+  const navigate = useNavigate();
   const inputStyle = {
     width: '100%',
     padding: '14px 16px',
@@ -39,14 +42,34 @@ function Login() {
   }
 
   if (!passwordRegex.test(password)) {
-    alert(
+    toast.error(
       "Password must be at least 8 characters and contain uppercase, lowercase, and a number"
     );
     return;
   }
 
   console.log({ email, password });
-  alert("Login Successful!");
+  axios.post('https://staging-api.gatherly.io/api/auth/login', { email, password })
+    .then((response) => {
+      console.log(response.data);
+      toast.success("Login Successful!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      }
+      );
+        navigate('/dashboard')
+
+    })
+
+    
+    .catch((error) => {
+      console.error(error);
+      toast.error("Login Failed. Please check your credentials and try again.");
+    });
   };
 
   return (
