@@ -3,7 +3,7 @@ const EventCard = ({ image, title, attendees }) => {
     <div className="event-card">
       <img src={image} alt={title} />
 
-      <div className="card-content">
+      <div className="event-card-content">
         <small>Conference</small>
 
         <h4>{title}</h4>

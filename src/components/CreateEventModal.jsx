@@ -1,7 +1,4 @@
-import Modal from 'react-modal'
-import { useState } from 'react'
-
-Modal.setAppElement('#root')
+import { useEffect, useState } from 'react'
 
 const inputStyle = {
   width: '100%',
@@ -29,7 +26,7 @@ const rowStyle = {
   gap: '16px',
 }
 
-function CreateEventModal({ isOpen, onClose }) {
+function CreateEventModal({ isOpen, onClose, eventToEdit, onSubmit }) {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [datetime, setDatetime] = useState('')
@@ -40,33 +37,82 @@ function CreateEventModal({ isOpen, onClose }) {
   const [capacity, setCapacity] = useState('')
   const [price, setPrice] = useState('')
 
+  const resetForm = () => {
+    setTitle(''); setDescription(''); setDatetime(''); setCategory('Conference')
+    setLocation(''); setOrganizerName(''); setOrganizerEmail(''); setCapacity(''); setPrice('')
+  }
+
+  useEffect(() => {
+    if (!isOpen) return
+
+    if (eventToEdit) {
+      setTitle(eventToEdit.title || '')
+      setDescription(eventToEdit.description || '')
+      setDatetime(eventToEdit.datetime || eventToEdit.date || '')
+      setCategory(eventToEdit.category || 'Conference')
+      setLocation(eventToEdit.location || '')
+      setOrganizerName(eventToEdit.organizerName || '')
+      setOrganizerEmail(eventToEdit.organizerEmail || '')
+      setCapacity(eventToEdit.attendees || '')
+      setPrice(eventToEdit.price || '')
+      return
+    }
+
+    resetForm()
+  }, [isOpen, eventToEdit])
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log({ title, description, datetime, category, location, organizerName, organizerEmail, capacity, price })
+
+    const payload = {
+      id: eventToEdit?.id || Date.now(),
+      title,
+      description,
+      date: datetime ? new Date(datetime).toLocaleString() : 'TBD',
+      time: datetime ? new Date(datetime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'TBD',
+      category,
+      location,
+      organizerName,
+      organizerEmail,
+      attendees: capacity || '0/150',
+      price,
+      spots: `${Math.max(0, Number(capacity || 0) - 10)} spots left`,
+    }
+
+    if (typeof onSubmit === 'function') {
+      onSubmit(payload)
+    } else {
+      console.log(payload)
+    }
     onClose()
   }
 
   const handleCancel = () => {
-    setTitle(''); setDescription(''); setDatetime(''); setCategory('Conference')
-    setLocation(''); setOrganizerName(''); setOrganizerEmail(''); setCapacity(''); setPrice('')
+    resetForm()
     onClose()
   }
 
+  if (!isOpen) return null
+
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={handleCancel}
+    <div
+      onClick={handleCancel}
       style={{
-        overlay: {
-          backgroundColor: 'rgba(0,0,0,0.5)',
-          zIndex: 1000,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        },
-        content: {
+        position: 'fixed',
+        inset: 0,
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        backdropFilter: 'blur(4px)',
+        zIndex: 1000,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '16px',
+      }}
+    >
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{
           position: 'relative',
-          inset: 'auto',
           borderRadius: '20px',
           padding: '36px',
           width: '100%',
@@ -76,12 +122,14 @@ function CreateEventModal({ isOpen, onClose }) {
           border: 'none',
           boxShadow: '0 8px 40px rgba(0,0,0,0.15)',
           fontFamily: 'Poppins, sans-serif',
-        },
-      }}
-    >
+          background: '#fff',
+        }}
+      >
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '6px' }}>
-        <h2 style={{ fontSize: '26px', fontWeight: '800', color: '#0E0D0D' }}>Create New Event</h2>
+        <h2 style={{ fontSize: '26px', fontWeight: '800', color: '#0E0D0D' }}>
+          {eventToEdit ? 'Edit Event' : 'Create New Event'}
+        </h2>
         <button onClick={handleCancel} style={{ background: 'none', border: 'none', fontSize: '20px', color: '#999', cursor: 'pointer', lineHeight: 1, paddingTop: '4px' }}>×</button>
       </div>
 
@@ -171,7 +219,7 @@ function CreateEventModal({ isOpen, onClose }) {
               fontFamily: 'Poppins, sans-serif',
             }}
           >
-            Create Event
+            {eventToEdit ? 'Save Changes' : 'Create Event'}
           </button>
           <button
             type="button"
@@ -192,7 +240,8 @@ function CreateEventModal({ isOpen, onClose }) {
           </button>
         </div>
       </form>
-    </Modal>
+    </div>
+  </div>
   )
 }
 

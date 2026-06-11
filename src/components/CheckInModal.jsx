@@ -1,7 +1,4 @@
-import Modal from 'react-modal'
 import { useState } from 'react'
-
-Modal.setAppElement('#root')
 
 const initialAttendees = [
   { id: 1, name: 'Wealth Happiness', ticket: 'TKT-1669502136936-9YTFCC', checkedIn: false },
@@ -31,24 +28,27 @@ function CheckInModal({ isOpen, onClose, eventTitle }) {
     onClose()
   }
 
-  // Split title for styled heading — "Check-In: Football Match"
-  const shortTitle = eventTitle ? eventTitle.replace(/^.*?:\s*/, '') : ''
+  if (!isOpen) return null
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={handleClose}
+    <div
+      onClick={handleClose}
       style={{
-        overlay: {
-          backgroundColor: 'rgba(0,0,0,0.45)',
-          zIndex: 1000,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        },
-        content: {
+        position: 'fixed',
+        inset: 0,
+        backgroundColor: 'rgba(0,0,0,0.45)',
+        backdropFilter: 'blur(4px)',
+        zIndex: 1000,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '16px',
+      }}
+    >
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{
           position: 'relative',
-          inset: 'auto',
           borderRadius: '20px',
           padding: '36px',
           width: '100%',
@@ -58,9 +58,9 @@ function CheckInModal({ isOpen, onClose, eventTitle }) {
           border: 'none',
           boxShadow: '0 8px 40px rgba(0,0,0,0.15)',
           fontFamily: 'Poppins, sans-serif',
-        },
-      }}
-    >
+          background: '#fff',
+        }}
+      >
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '6px' }}>
         <h2 style={{ fontSize: '24px', fontWeight: '800', color: '#0E0D0D' }}>
@@ -184,7 +184,8 @@ function CheckInModal({ isOpen, onClose, eventTitle }) {
           </p>
         )}
       </div>
-    </Modal>
+    </div>
+  </div>
   )
 }
 

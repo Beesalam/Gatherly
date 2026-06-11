@@ -1,13 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "./Logo";
 import { BsCalendarDateFill } from "react-icons/bs";
-import { GoPlus } from "react-icons/go";
 import { PiCirclesFour } from "react-icons/pi";
+import { FiLogOut } from "react-icons/fi";
 
 
 
 
-const NavbarTwo = () => {
+
+const NavbarTwo = ({ onCreateClick }) => {
   const navigate = useNavigate();
 
   return (
@@ -26,12 +27,12 @@ const NavbarTwo = () => {
           My Events
         </Link>
         <button className="logout-btn" onClick={() => navigate("/login")}>
+          <span className="nav-link-icon"><FiLogOut /></span>
           Logout
         </button>
       </div>
-      <button className="organizer-create-btn" onClick={() => navigate("/events")}>
-      <span className="nav-link-icon"><GoPlus /></span>
-        Create Events
+      <button className="organizer-create-btn" onClick={onCreateClick}>
+        <span style={{ color: '#FCB8C9' }}>+</span> Create Events
       </button>
     </nav>
   );

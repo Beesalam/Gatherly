@@ -1,8 +1,17 @@
-import Navbar from "./Navbar";
-import CTA from "./CTA";
-import Footer from "./Footer";
+import { useState } from 'react';
+import Navbar from './Navbar';
+import CTA from './CTA';
+import Footer from './Footer';
+import { BsCalendarDateFill } from 'react-icons/bs';
+import { IoTicketOutline } from 'react-icons/io5';
+import { HiOutlineUsers } from 'react-icons/hi2';
+import { CiLocationOn } from 'react-icons/ci';
+import RSVPModal from './RSVPModal';
+
+
 
 const events = [
+
   {
     id: 1,
     category: "Sport",
@@ -22,7 +31,7 @@ const events = [
     time: "1:00 PM",
     location: "Tech Hub",
     attendees: 45,
-    price: "$25",
+    price: "25",
     spots: "12 spots left",
   },
   {
@@ -33,12 +42,20 @@ const events = [
     time: "10:00 AM",
     location: "Downtown Center",
     attendees: 250,
-    price: "$99",
+    price: "99",
     spots: "32 spots left",
   },
 ];
 
 const EventsPage = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+
+  const openRSVP = (event) => {
+    setSelectedEvent(event);
+    setModalOpen(true);
+  };
+
   return (
     <>
       <Navbar />
@@ -54,8 +71,7 @@ const EventsPage = () => {
             <option>Sport</option>
             <option>Workshop</option>
             <option>Conference</option>
-          </select>
-
+          </select> 
           <p>{events.length} Events Found</p>
         </div>
 
@@ -63,25 +79,38 @@ const EventsPage = () => {
           {events.map((event) => (
             <div className="event-item" key={event.id}>
               <div className="event-item-banner">
-                <span>{event.category}</span>
+                <span style={{backgroundColor: '#FFD3DE', color: '#8D8A8A'}}>{event.category}</span>
               </div>
 
               <div className="event-item-content">
                 <h3>{event.title}</h3>
 
                 <p>
-                  📅 {event.date} • {event.time}
+                  <span style={{ backgroundColor:"white", padding:"6px", marginBlockStart:"-20px", borderRadius:"10%", display:"inline-block", color:"#E57591", marginBottom:"6px" }}>
+                    <BsCalendarDateFill />
+                 </span>
+                   {event.date} • {event.time}
                 </p>
 
-                <p>📍 {event.location}</p>
+                <p>
+                  <span style={{ backgroundColor:"white", padding:"6px", marginBlockStart:"-20px", borderRadius:"10%", display:"inline-block", color:"#E57591", marginBottom:"6px" }}>
+                     <CiLocationOn />
+                  </span>
+                   {event.location}</p>
 
-                <p>👥 {event.attendees} Attendees</p>
+                <p> 
+                  <span style={{ backgroundColor:"white", padding:"6px", marginBlockStart:"-20px", borderRadius:"10%", display:"inline-block", color:"#E57591", marginBottom:"6px" }}>
+                   <HiOutlineUsers />
+                  </span>
+                  {event.attendees} Attendees</p>
 
-                <p>🏷 {event.price}</p>
+                <p>
+                  <span style={{ backgroundColor: "white", padding:"6px", marginBlockStart:"-20px", borderRadius:"10%", display:"inline-block", color:"#E57591", marginBottom:"6px" }}><IoTicketOutline /></span>
+                   {event.price}</p>
 
                 <div className="event-item-footer">
                   <button className="spots-btn">{event.spots}</button>
-                  <button className="rsvp-btn">RSVP →</button>
+                  <button className="rsvp-btn" onClick={() => openRSVP(event)}>RSVP →</button>
                 </div>
               </div>
             </div>
@@ -90,6 +119,12 @@ const EventsPage = () => {
       </section>
 
       
+
+      <RSVPModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        event={selectedEvent}
+      />
 
       <CTA />
 
