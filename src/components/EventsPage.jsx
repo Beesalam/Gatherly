@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 import CTA from './CTA';
 import Footer from './Footer';
@@ -7,6 +7,8 @@ import { IoTicketOutline } from 'react-icons/io5';
 import { HiOutlineUsers } from 'react-icons/hi2';
 import { CiLocationOn } from 'react-icons/ci';
 import RSVPModal from './RSVPModal';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 
@@ -50,11 +52,23 @@ const events = [
 const EventsPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
-
+  const [eventData, setEventData] = useState([]);
   const openRSVP = (event) => {
     setSelectedEvent(event);
     setModalOpen(true);
   };
+
+  useEffect(() => {
+      axios.get('https://staging-api.gatherly.io/api/events')
+        .then((response) => {
+          console.log('Events data:', response.data);
+          setEventData(response.data);
+        })
+        .catch((error) => {
+          console.error('Error fetching events:', error);
+          toast.error("Failed to load events. Please try again later.");
+        });
+  }, []);
 
   return (
     <>
