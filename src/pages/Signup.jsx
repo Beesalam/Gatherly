@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../components/Logo'
+import { toast } from 'react-toastify';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Signup() {
   const [name, setName] = useState('')
@@ -8,6 +11,9 @@ function Signup() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const [showPassword, setShowPassword] = useState(false);
+
+  const navigate = useNavigate();
   const inputStyle = {
     width: '100%',
     padding: '14px 16px',
@@ -36,20 +42,54 @@ function Signup() {
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
     if (!emailRegex.test(email)) {
-      alert("Please enter a valid email address");
+      toast.error("Please enter a valid email address");
       return;
     }
 
     if (!passwordRegex.test(password)) {
-      alert(
+      toast.error(
         "Password must be at least 8 characters and contain uppercase, lowercase, and a number"
       );
       return;
     }
 
-    console.log({ name, contact, email, password });
-    alert("Signup Successful!");
+     
+    const data = {
+      fullName: name,
+      phone: contact,
+      email: email,
+      password: password,
+      role: "Organizer",
+    }
+
+
+     axios.post('https://staging-api.gatherly.io/api/auth/register', data).then((response) => {
+      toast.success('Signup Successful!', {
+position: "top-center",
+autoClose: 5000,
+hideProgressBar: false,
+closeOnClick: false,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme: "light",
+
+      });
+       navigate('/login');
+    }).catch((error) => {
+      console.error(error);
+      toast.error("Signup Failed. Please try again.");
+    });
+   
+ 
   };
+
+  const hidePws = () => {
+
+    setShowPassword(showPassword==true?false:true);
+    
+
+   }
 
   return (
     <div style={{
@@ -104,6 +144,22 @@ function Signup() {
             />
           </div>
 
+          {/* role: Attendee or Organizer using radio */}
+          {/* <div>
+            <label style={labelStyle}>Role</label>
+            <div style={{display:"flex", alignItems:'center', gap:"20px"}}>
+              <label style={{display:"flex", alignItems:'center', gap:"6px"}}>
+                <input type="radio" name="role" value="organizer" defaultChecked />
+                Organizer
+              </label>
+              <label style={{display:"flex", alignItems:'center', gap:"6px"}}>
+                <input type="radio" name="role" value="attendee" />
+                Attendee
+              </label>
+            </div>
+            
+          </div> */}
+
           <div>
             <label style={labelStyle}>Email Address</label>
             <input
@@ -117,13 +173,27 @@ function Signup() {
 
           <div>
             <label style={labelStyle}>Password</label>
-            <input
-              type="password"
+            <div style={{display:"flex", alignItems:'center', gap:"10px"}}>
+               <input
+              type={showPassword ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Wealth1010"
               style={inputStyle}
             />
+            <button onClick={()=>hidePws()} type="button" style={{
+             
+            backgroundColor: 'gray',
+              border: 'none',
+              cursor: 'pointer',
+                color: 'white',
+              padding: '6px 12px',
+              borderRadius: '6px',
+              fontSize: '12px',
+            }}>
+              {showPassword ? "Hide" : "Show"}
+            </button>
+           </div>
           </div>
 
           <button type="submit" style={{
