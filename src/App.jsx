@@ -6,9 +6,19 @@ import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import Dashboard from "./pages/Dashboard";
 import { ToastContainer } from 'react-toastify';
+import useStore from './store';
+
+
+
 
 
 function App() {
+
+    const user = useStore((state) =>
+state.name)
+
+console.log(user)
+
     return (
         <>
            <ToastContainer
